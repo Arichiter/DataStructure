@@ -13,6 +13,7 @@ typedef struct SqList
     int MaxSize, length;
 } SqList;
 
+// 初始化线性表
 void InitList(SqList *L)
 {
     L->data = (ElemType *)malloc(sizeof(ElemType) * InitSize);
@@ -20,6 +21,7 @@ void InitList(SqList *L)
     L->MaxSize = InitSize;
 }
 
+// 打印线性表
 void PrintList(SqList L)
 {
     for (int i = 0; i < L.length; i++)
@@ -30,6 +32,7 @@ void PrintList(SqList L)
     printf("\n%d, %d\n", L.length, L.MaxSize);
 }
 
+// 增加线性表空间
 void IncreaseList(SqList *L, int len)
 {
     ElemType *p = L->data;
@@ -42,6 +45,7 @@ void IncreaseList(SqList *L, int len)
     free(p);
 }
 
+// 插入元素
 bool ListInsert(SqList *L, int i, ElemType e)
 {
     // i表示位序，从1开始
@@ -60,6 +64,7 @@ bool ListInsert(SqList *L, int i, ElemType e)
     return true;
 }
 
+// 按值删除元素
 bool ListDelete(SqList *L, ElemType e)
 {
     bool flag = false;
@@ -111,11 +116,12 @@ int LocateElem(SqList L, ElemType e)
 }
 
 // 按位序查找
-int LocateElem2(SqList L, int i) 
+int LocateElem2(SqList L, int i)
 {
     return L.data[i - 1];
 }
 
+// 测试用例
 void test1()
 {
     SqList L;
@@ -144,5 +150,4 @@ void test1()
     int i = LocateElem(L, 20);
     printf("loc = %d\n", i);
     printf("value = %d\n", LocateElem2(L, 4));
-
 }
