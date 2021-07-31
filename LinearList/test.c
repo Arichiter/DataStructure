@@ -1,19 +1,5 @@
 #include "SqListBook.c"
 
-void CreateTestList(SqList *L);
-
-void Q1Test(SqList L);
-
-int main(void)
-{
-    SqList L;
-
-    CreateTestList(&L);
-
-    Q1Test(L);
-
-    return 0;
-}
 
 void CreateTestList(SqList *L)
 {
@@ -26,6 +12,22 @@ void CreateTestList(SqList *L)
         L->length++;
     }
     PrintList((*L));
+}
+
+void Q1Test(SqList L);
+
+int main(void)
+{
+    SqList L;
+    CreateTestList(&L);
+
+    // 问题1
+    Q1Test(L);
+
+    // 问题2
+
+
+    return 0;
 }
 
 void Q1Test(SqList L)

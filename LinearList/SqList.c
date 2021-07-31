@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <time.h>
 
 #define InitSize 30
 
@@ -11,61 +12,6 @@ typedef struct SqList
     ElemType *data;
     int MaxSize, length;
 } SqList;
-
-// 初始化线性表
-void InitList(SqList *L);
-
-// 销毁线性表
-void DestroyList(SqList *L);
-
-// 打印线性表
-void PrintList(SqList L);
-
-void IncreaseList(SqList *L, int len);
-
-// 增
-bool ListInsert(SqList *L, int i, ElemType e);
-
-// 删
-bool ListDelete(SqList *L, ElemType e);
-bool ListDelete2(SqList *L, int i, ElemType *e);
-
-// 查
-int LocateElem(SqList L, ElemType e);
-int LocateElem2(SqList L, int i);
-
-void test1();
-
-void test1()
-{
-    SqList L;
-    InitList(&L);
-
-    for (int i = 0; i < 5; i++)
-    {
-        L.data[i] = i;
-        L.length += 1;
-    }
-
-    PrintList(L);
-
-    ListInsert(&L, 3, 10);
-    PrintList(L);
-    ListInsert(&L, L.length, 89);
-    PrintList(L);
-
-    int e;
-    ListDelete(&L, 89);
-    PrintList(L);
-    ListDelete2(&L, 3, &e);
-    printf("del e = %d\n", e);
-    PrintList(L);
-
-    int i = LocateElem(L, 20);
-    printf("loc = %d\n", i);
-    printf("value = %d\n", LocateElem2(L, 4));
-
-}
 
 void InitList(SqList *L)
 {
@@ -168,4 +114,35 @@ int LocateElem(SqList L, ElemType e)
 int LocateElem2(SqList L, int i) 
 {
     return L.data[i - 1];
+}
+
+void test1()
+{
+    SqList L;
+    InitList(&L);
+
+    for (int i = 0; i < 5; i++)
+    {
+        L.data[i] = i;
+        L.length += 1;
+    }
+
+    PrintList(L);
+
+    ListInsert(&L, 3, 10);
+    PrintList(L);
+    ListInsert(&L, L.length, 89);
+    PrintList(L);
+
+    int e;
+    ListDelete(&L, 89);
+    PrintList(L);
+    ListDelete2(&L, 3, &e);
+    printf("del e = %d\n", e);
+    PrintList(L);
+
+    int i = LocateElem(L, 20);
+    printf("loc = %d\n", i);
+    printf("value = %d\n", LocateElem2(L, 4));
+
 }

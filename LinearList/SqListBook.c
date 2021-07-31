@@ -1,5 +1,4 @@
 #include "SqList.c"
-#include <time.h>
 
 // 问题1
 bool DelMinNum(SqList *L, ElemType *e)
@@ -25,3 +24,4 @@ bool DelMinNum(SqList *L, ElemType *e)
 
     return true;
 }
+
