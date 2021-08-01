@@ -129,3 +129,25 @@ bool DelComNum(SqList *L)
     L->length = i + 1;
     return true;
 }
+
+void MergeList(SqList L, SqList R, SqList *LR)
+{
+    while (L.length + R.length > LR->MaxSize)
+        IncreaseList(LR, 10);
+
+    // 书解
+    int i = 0, j = 0, k = 0;
+    while (i < L.length && j < R.length)
+        if (L.data[i] <= R.data[j])
+            LR->data[k++] = L.data[i++];
+        else
+            LR->data[k++] = L.data[j++];
+
+    while (i < L.length)
+        LR->data[k++] = L.data[i++];
+    while (j < R.length)
+        LR->data[k++] = L.data[j++];
+
+    LR->length = k;
+
+}

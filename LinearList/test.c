@@ -85,6 +85,24 @@ void Q6Test()
     PrintList(L);
 }
 
+void Q7Test() 
+{
+    printf("\n*********Q7*********\n");
+    SqList L, R, LR;
+    InitList(&LR);
+    ElemType a[] = {1, 2, 3, 4, 5};
+    ElemType b[] = {3, 4, 5, 6, 7, 8};
+    L.data = a;
+    R.data = b;
+    L.length = sizeof(a) / sizeof(ElemType);
+    R.length = sizeof(b) / sizeof(ElemType);
+
+    PrintList(L);
+    PrintList(R);
+    MergeList(L, R, &LR);
+    PrintList(LR);
+}
+
 int main(void)
 {
     SqList L;
@@ -107,6 +125,9 @@ int main(void)
 
     // 问题6
     Q6Test();
+
+    // 问题7
+    Q7Test();
 
     return 0;
 }
