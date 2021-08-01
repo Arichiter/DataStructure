@@ -73,6 +73,18 @@ void Q5Test()
     PrintList(L);
 }
 
+void Q6Test()
+{
+    printf("\n*********Q6*********\n");
+    SqList L;
+    ElemType a[] = {1, 2, 3, 4, 5, 5, 6, 7, 7, 8, 10, 10, 11, 12};
+    L.data = a;
+    L.length = sizeof(a) / sizeof(ElemType);
+    PrintList(L);
+    DelComNum(&L);
+    PrintList(L);
+}
+
 int main(void)
 {
     SqList L;
@@ -92,6 +104,9 @@ int main(void)
 
     // 问题5
     Q5Test();
+
+    // 问题6
+    Q6Test();
 
     return 0;
 }

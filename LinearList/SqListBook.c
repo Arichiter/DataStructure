@@ -102,3 +102,21 @@ bool DelStoT2(SqList *L, ElemType s, ElemType t)
     L->length = j;
     return true;
 }
+
+// 问题6：从有序顺序表中删除重复值
+bool DelComNum(SqList *L)
+{
+    if (L->length <= 0)
+        return false;
+
+    int j = 0;
+    for (int i = 1; i < L->length; i++)
+    {
+        if (L->data[i] == L->data[j])
+            L->data[j] = L->data[i];
+        else   
+            L->data[++j] = L->data[i];
+    }
+    L->length = j + 1;
+    return true;
+}
