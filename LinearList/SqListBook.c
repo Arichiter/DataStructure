@@ -109,14 +109,23 @@ bool DelComNum(SqList *L)
     if (L->length <= 0)
         return false;
 
-    int j = 0;
-    for (int i = 1; i < L->length; i++)
+    // int j = 0;
+    // for (int i = 1; i < L->length; i++)
+    // {
+    //     if (L->data[i] == L->data[j])
+    //         L->data[j] = L->data[i];
+    //     else
+    //         L->data[++j] = L->data[i];
+    // }
+    // L->length = j + 1;
+
+    // 书解
+    int i, j;
+    for (i = 0, j = 1; j < L->length; j++)
     {
-        if (L->data[i] == L->data[j])
-            L->data[j] = L->data[i];
-        else   
-            L->data[++j] = L->data[i];
+        if (L->data[i] != L->data[j])
+            L->data[++i] = L->data[j];
     }
-    L->length = j + 1;
+    L->length = i + 1;
     return true;
 }
