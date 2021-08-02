@@ -1,11 +1,11 @@
 #include "SqListBook.c"
 
-void CreateTestList(SqList *L)
+void CreateTestList(SqList *L, int len)
 {
     InitList(L);
 
     srand((unsigned)time(NULL));
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < len; i++)
     {
         L->data[i] = rand() % 20 + 1;
         L->length++;
@@ -26,7 +26,7 @@ void Q2Test(SqList L)
     printf("\n*********Q2*********\n");
     printf("before reverse\n");
     PrintList(L);
-    ReverseList(&L);
+    ReverseList(&L, 0, L.length - 1);
     printf("after reverse\n");
     PrintList(L);
 }
@@ -67,7 +67,7 @@ void Q5Test()
 {
     printf("\n*********Q5*********\n");
     SqList L;
-    CreateTestList(&L);
+    CreateTestList(&L, 10);
     PrintList(L);
     DelStoT2(&L, 7, 16);
     PrintList(L);
@@ -85,7 +85,7 @@ void Q6Test()
     PrintList(L);
 }
 
-void Q7Test() 
+void Q7Test()
 {
     printf("\n*********Q7*********\n");
     SqList L, R, LR;
@@ -103,10 +103,24 @@ void Q7Test()
     PrintList(LR);
 }
 
+void Q8Test()
+{
+    printf("\n*********Q8*********\n");
+    SqList L;
+    CreateTestList(&L, 10);
+
+    PrintList(L);
+    Exchange(&L, 5, 5);
+    // Exchange(&L, 4, 6);
+    // PrintList(L);
+    // Exchange(&L, 3, 7);
+    PrintList(L);
+}
+
 int main(void)
 {
     SqList L;
-    CreateTestList(&L);
+    CreateTestList(&L, 10);
 
     // 问题1
     Q1Test(L);
@@ -128,6 +142,9 @@ int main(void)
 
     // 问题7
     Q7Test();
+
+    // 问题8
+    Q8Test();
 
     return 0;
 }

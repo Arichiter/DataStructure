@@ -26,14 +26,15 @@ bool DelMinNum(SqList *L, ElemType *e)
 }
 
 // 问题2：原地逆置元素
-void ReverseList(SqList *L)
+void ReverseList(SqList *L, int left, int right)
 {
     ElemType temp;
-    for (int i = 0; i < L->length / 2; i++)
+    int mid = (left + right) / 2;
+    for (int i = 0; i < mid - left; i++)
     {
-        temp = L->data[i];
-        L->data[i] = L->data[L->length - i - 1];
-        L->data[L->length - i - 1] = temp;
+        temp = L->data[left + i];
+        L->data[left + i] = L->data[right - i];
+        L->data[right - i] = temp;
     }
 }
 
@@ -138,16 +139,48 @@ void MergeList(SqList L, SqList R, SqList *LR)
     // 书解
     int i = 0, j = 0, k = 0;
     while (i < L.length && j < R.length)
-        if (L.data[i] <= R.data[j])
+        if (L.data[i] < R.data[j])
             LR->data[k++] = L.data[i++];
         else
-            LR->data[k++] = L.data[j++];
-
+            LR->data[k++] = R.data[j++];
+    
     while (i < L.length)
         LR->data[k++] = L.data[i++];
+    
     while (j < R.length)
-        LR->data[k++] = L.data[j++];
-
+        LR->data[k++] = R.data[j++];
+    
     LR->length = k;
+}
+
+void Exchange(SqList *L, int m, int n)
+{
+    // // 倒置第一个List
+    // ElemType temp;
+    // for (int i = 0; i < m / 2; i++)
+    // {
+    //     temp = L->data[i];
+    //     L->data[i] = L->data[m - i - 1];
+    //     L->data[m - i - 1] = temp;
+    // }
+    // // 倒置第2个List
+    // for (int i = m; i < n / 2 + m; i++)
+    // {
+    //     temp = L->data[i];
+    //     L->data[i] = L->data[L->length - i + m - 1];
+    //     L->data[L->length - i + m - 1] = temp;
+    // }
+    // // 全部倒置
+    // for (int i = 0; i < L->length / 2; i++)
+    // {
+    //     temp = L->data[i];
+    //     L->data[i] = L->data[L->length - i - 1];
+    //     L->data[L->length - i - 1] = temp;
+    // }
+
+    // 书解
+    ReverseList(L, 0, m - 1);
+    ReverseList(L, m, L->length - 1);
+    ReverseList(L, 0, L->length - 1);
 
 }
