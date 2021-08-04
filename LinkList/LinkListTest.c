@@ -1,6 +1,6 @@
 #include "LinkList.c"
 
-int main(void) 
+int main(void)
 {
     LinkList L;
     InitLinkList(&L);
@@ -16,6 +16,9 @@ int main(void)
     printf("%d\n", p->data);
 
     InsertNode(&L, 80, 8);
+    PrintLinkList(L);
+
+    DeleteNode(&L, 8);
     PrintLinkList(L);
 
     return 0;
