@@ -117,6 +117,20 @@ void Q8Test()
     PrintList(L);
 }
 
+void Q9Test()
+{
+    printf("\n*********Q9*********\n");
+    SqList L;
+    ElemType a[] = {1, 3, 4, 5, 8, 10, 12, 35, 0};
+    L.data = a;
+    L.length = sizeof(a) / sizeof(ElemType) - 1;
+    L.MaxSize = L.length + 1;
+
+    PrintList(L);
+    SearchExchangInsert(&L, 7);
+    PrintList(L);
+}
+
 int main(void)
 {
     SqList L;
@@ -145,6 +159,9 @@ int main(void)
 
     // 问题8
     Q8Test();
+
+    // 问题9
+    Q9Test();
 
     return 0;
 }

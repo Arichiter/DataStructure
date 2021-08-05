@@ -185,4 +185,53 @@ void Exchange(SqList *L, int m, int n)
 
 }
 
-// 问题9：
+// 问题9：有序表中最快时间内找到x与后继元素交换（二分查找）,找不到就按按大小插入
+void SearchExchangInsert(SqList *L, int x)
+{
+    int left, right, mid;
+    left = 0;
+    right = L->length - 1;
+    mid = (left + right) / 2;
+
+    int temp;
+    // while (left <= right)
+    // {
+    //     if (x == L->data[mid])
+    //     {
+    //         temp = L->data[mid];
+    //         L->data[mid] = L->data[mid + 1];
+    //         L->data[mid + 1] = temp;
+    //         return;
+    //     }
+    //     else if (x > L->data[mid])
+    //         left = mid + 1;
+    //     else
+    //         right = mid - 1;
+        
+    //     mid = (left + right) / 2;  
+    // }
+
+    // 书解
+    while (left <= right)
+    {
+        if (x == L->data[mid]) break;
+        else if(x < L->data[mid]) right = mid - 1;
+        else left = mid + 1;
+        mid = (left + right) / 2;
+    }
+
+    if (x == L->data[mid] && mid != L->length - 1)  // 若是最后一个元素无需交换
+    {
+        temp = L->data[mid];
+        L->data[mid] = L->data[mid + 1];
+        L->data[mid + 1] = temp;
+    }
+    if (left > right)
+    {
+        int i;
+        for (i = L->length - 1; i > right; i--) (*L).data[i + 1] = (*L).data[i];
+        (*L).data[i + 1] = x;
+        L->length++;
+    }
+    
+}
