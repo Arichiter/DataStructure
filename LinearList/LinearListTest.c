@@ -127,7 +127,7 @@ void Q9Test()
     L.MaxSize = L.length + 1;
 
     PrintList(L);
-    SearchExchangInsert(&L, 7);
+    SearchExchangInsert(&L, 2);
     PrintList(L);
 }
 

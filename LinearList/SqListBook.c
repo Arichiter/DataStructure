@@ -235,3 +235,4 @@ void SearchExchangInsert(SqList *L, int x)
     }
     
 }
+

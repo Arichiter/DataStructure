@@ -1,25 +1,33 @@
-#include "LinkList.c"
+#include "LinkListBook.c"
 
-int main(void)
+void Q1Test()
 {
     LinkList L;
-    InitLinkList(&L);
+    L = (LinkList) malloc (sizeof(LNode));
+    L->data = 1;
+    L->next = NULL;
 
-    // HeadCreateLinkList(&L, 10);
-    TailCreateLinkList(&L, 10);
+    int x;
+    LNode *q = L;
+    for (int i = 0; i < 10; i++)
+    {
+        LNode *p = (LNode *) malloc (sizeof(LNode));
+        scanf("%d", &x);
+        p->data = x;
+        q->next = p;
+        q = p;
+    }
+    q->next = NULL;
+    // 1 6 2 5 1 5 9 8 5 5
+    PrintLinkList(L);
+    DelNum(&L, 5);
     PrintLinkList(L);
 
-    LNode *p = GetElem(L, 7);
-    printf("%d\n", p->data);
+}
 
-    p = LocateElem(L, 1);
-    printf("%d\n", p->data);
-
-    InsertNode(&L, 80, 8);
-    PrintLinkList(L);
-
-    DeleteNode(&L, 8);
-    PrintLinkList(L);
+int main(void)
+{   
+    Q1Test();
 
     return 0;
 }
