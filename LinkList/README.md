@@ -42,5 +42,56 @@ void DelNum(LinkList *L, ElemType x)
 ​		用p指针指向当前结点，遍历整个链表，pre指向*p结点的前驱。若p所指结点的值为x，则删除，并让p移向下一个结点，否则让pre、p指针同步后移一个结点。
 
 ```c
+void DelNum_2(LinkList *L, ElemType x)
+{
+    LNode *p = (*L)->next;                    // p point the first node
+    LNode *pre = (*L);                        // pre point p previous node
+    
+    // scan the linklist
+    LNode *q;
+    while (p)
+    {
+        if (p->data == x)
+        {
+            q = p;                          // point the present node
+            p = p->next;                    // point the next node
+            pre->next = p;                  // delete the node
+            free(q);                        // free the node
+        }
+        else
+        {
+            // move the next node
+            pre = p;                        
+            p = p->next;
+        }
+    }
+
+}
 ```
+
+
+
+>问题3：
+>
+>设L为带头结点的单链表，编写算法实现从尾到头方向输出每个结点的值。
+
+**基本设计思想：**
+
+​		设f(L)的功能是寻找以L为首指针的单链表中指针域为NULL的结点，显然有f(L->next)是寻找以L->next为首指针的单链表中指针域为NULL的结点，由此可推出一下递归模型，
+
+​		递归主体：f(L) ≡ f(L->next)；									  若L->next ！= NULL
+
+​		终止条件：f(L) ≡ 打印当前结点的数据；					若L != NULL
+
+```c
+void ReversePrint(LinkList L)
+{
+    if (L->next != NULL)
+        ReversePrint(L->next);
+    if (L != NULL)
+        printf("%4d", L->data);
+}
+```
+
+
 

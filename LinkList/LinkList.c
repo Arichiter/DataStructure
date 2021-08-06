@@ -80,8 +80,8 @@ bool HeadCreateLinkList(LinkList *L, int len)
         p = (LNode *)malloc(sizeof(LNode));
         p->data = rand() % 20 + 1;
         // p->data = i + 1;
-        p->next = (*L)->next;
-        (*L)->next = p;
+        p->next = (*L);
+        (*L) = p;
     }
     return true;
 }
@@ -98,8 +98,8 @@ bool TailCreateLinkList(LinkList *L, int len)
     for (int i = 0; i < len; i++)
     {
         p = (LNode *)malloc(sizeof(LNode));
-        // p->data = rand() % 20 + 1;
-        p->data = i + 1;
+        p->data = rand() % 20 + 1;
+        // p->data = i + 1;
         q->next = p;
         q = p;
     }
