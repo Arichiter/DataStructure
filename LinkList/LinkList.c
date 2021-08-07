@@ -39,8 +39,9 @@ int PrintLinkList(LinkList L)
     int len = 0;
     if (L == NULL)
         return len;
-
-    p = L->next;
+        
+    // L save the address of head node
+    p = L->next;                        // point the address of first node
     while (p)
     {
         printf("%4d", p->data);
@@ -73,6 +74,9 @@ bool HeadCreateLinkList(LinkList *L, int len)
     if ((*L) == NULL)
         return false;
 
+    (*L) = (LNode *) malloc (sizeof(LNode));            // create the head node
+    (*L)->next = NULL;
+
     LNode *p;
     for (int i = 0; i < len; i++)
     {
@@ -80,8 +84,8 @@ bool HeadCreateLinkList(LinkList *L, int len)
         p = (LNode *)malloc(sizeof(LNode));
         p->data = rand() % 20 + 1;
         // p->data = i + 1;
-        p->next = (*L);
-        (*L) = p;
+        p->next = (*L)->next;
+        (*L)->next = p;
     }
     return true;
 }
@@ -92,8 +96,10 @@ bool TailCreateLinkList(LinkList *L, int len)
     if ((*L) == NULL)
         return false;
 
-    LNode *p, *q;
-    q = (*L);
+    (*L) = (LNode *) malloc (sizeof(LNode));            // create the head node
+    (*L)->next = NULL;
+
+    LNode *p, *q = (*L);                                // q is the tail point
 
     for (int i = 0; i < len; i++)
     {

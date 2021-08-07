@@ -93,5 +93,113 @@ void ReversePrint(LinkList L)
 }
 ```
 
+**[注]** 因为头结点也有数据域且指针域指向的是第一个结点的地址，如果把头结点也传入该函数的话，头结点里的数据也会被打印，所以传参的时候传入第一个结点的地址，即ReversePrint(L->next);
 
+
+
+# 8.07
+
+> 问题4：
+>
+> 试编写在带头结点的单链表L中删除一个最小值结点的高效算法（假设最小值结点时唯一的）
+
+**基本设计思想：**
+
+​		创建一个指针p用来指向最小结点，然后遍历整个链表L，比较找出最小结点的地址存入p。然后将该节点的数据域和指针域交换(删除)，将最小结点地址作为返回值返回。
+
+```c
+LNode DelMinNode(LinkList *L)
+{
+    LNode *p = (*L)->next;          // point the first node
+    LNode *q = (*L)->next;          // traverse the list
+    LNode min;
+    
+    while (q)                       // find the min node
+    {
+        if (q->data < p->data)      // record the min node
+            p = q;
+        q = q->next;
+    }
+
+    // sava the min node
+    min.next = p->next;
+    min.data = p->data;
+    // delete the min node
+    p->data = p->next->data;
+    p->next = p->next->next;      
+    // free the next node of min node, because the min node has became it
+    free(min.next);
+    return min;
+
+}
+```
+
+**书解：**
+
+```c
+void DelMinNodeAnwser(LinkList *L)
+{
+    // 书解
+    LNode *pre = (*L), *p = pre->next;
+    LNode *minpre = pre, *minp = p;
+    while (p != NULL)
+    {
+        if (p->data < minp->data)
+        {
+            minp = p;
+            minpre = pre;
+        }
+        pre = p;
+        p = p->next;
+    }
+    
+    minpre->next = minp->next;
+    free(minp);
+}
+```
+
+
+
+> 问题5：
+>
+> 试编写算法将带头结点的单链表就地逆置
+
+**基本设计思想：**
+
+​		解法一：利用头插法逆置
+
+​		解法二：明天再说
+
+```c
+// 问题5：原地逆置单链表
+void ReverseLinkList_1(LinkList *L)
+{
+    // 解法一：利用头插法逆置
+    LNode *p = (*L)->next;                  // p是工作指针
+    LNode *q;                               // q是p的后继指针
+    (*L)->next = NULL;
+    while (p)                               // 头插法
+    {
+        q = p->next;
+        p->next = (*L)->next;
+        (*L)->next = p;
+        p = q;
+    }
+}
+
+// 问题5：解法2
+void ReverseLinkList_2(LinkList *L)
+{
+    LNode *pre, *p = (*L)->next, *q = p->next;
+    p->next = NULL;
+    while (q)
+    {
+        pre = p;
+        p = q;
+        q = q->next;
+        p->next = pre;
+    }
+    (*L)->next = p;
+}
+```
 
