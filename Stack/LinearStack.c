@@ -42,7 +42,7 @@ bool Push(SqStack *S, ElemType x)
 }
 
 // 出栈
-bool Pop(SqStack *S, ElemType *x);
+bool Pop(SqStack *S, ElemType *x)
 {
     if (S->top == -1)
         return false;               // Stack is empty, false
@@ -66,7 +66,21 @@ bool DestoryStack(SqStack *S)
 {
     if (S == NULL)
         return false;
-        
+
     free(S);
+    return true;
+}
+
+bool PrintSqStack(SqStack S)
+{
+    int len = S.top + 1;
+    if (StackEmpty(S))
+        return false;
+    
+    while (S.top != -1)
+        printf("%4d", S.data[S.top--]);
+    
+    printf("\nlen = %d\n", len);
+
     return true;
 }
