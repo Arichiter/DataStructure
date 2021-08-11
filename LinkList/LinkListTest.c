@@ -72,6 +72,46 @@ void Q5Test()
     PrintLinkList(L);
 }
 
+void Q6Test()
+{
+    printf("\n***********Q6***********\n");
+    LinkList L;
+    HeadCreateLinkList(&L, 10);
+    PrintLinkList(L);
+    SortList(&L);
+    PrintLinkList(L);
+}
+
+void Q7Test()
+{
+    printf("\n***********Q7***********\n");
+    LinkList L;
+    HeadCreateLinkList(&L, 10);
+    PrintLinkList(L);
+    Del_S_T(&L, 5, 18);
+    PrintLinkList(L);
+}
+
+void Q8Test()
+{
+    printf("\n***********Q8***********\n");
+    LinkList L, M;
+    HeadCreateLinkList(&L, 10);
+    HeadCreateLinkList(&M, 5);
+
+    LNode *p = M->next, *q = L->next;
+    for (p = p->next; p->next != NULL; p = p->next);
+    for (int i = 0; i < 5; i++) q = q->next;
+
+    PrintLinkList(L);
+    PrintLinkList(M);
+    p->next = q;
+    p = Search_Common(L, M);
+    for (; p != NULL; p = p->next)
+        printf("%4d", p->data);
+    printf("\n");
+}
+
 int main(void)
 {   
     Q1Test();
@@ -83,6 +123,12 @@ int main(void)
     Q4Test();
 
     Q5Test();
+
+    Q6Test();
+
+    Q7Test();
+
+    Q8Test();
 
     return 0;
 }

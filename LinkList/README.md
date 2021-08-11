@@ -203,3 +203,112 @@ void ReverseLinkList_2(LinkList *L)
 }
 ```
 
+# 8.10
+
+> 问题6：
+>
+> 有一个带头结点的链表L，设计一个算法使其元素递增有序
+
+**基本设计思想：**
+
+​		设置指针p为工作指针，遍历链表
+
+```c
+bool SortList(LinkList *L)
+{
+    LNode *p = (*L)->next, *q = p->next;
+    ElemType temp;
+
+    if (*L == NULL)
+        return false;
+
+    while (p)
+    {
+        while (q)
+        {
+            if (p->data > q->data)
+            {
+                temp = p->data;
+                p->data = q->data;
+                q->data = temp;
+            }
+            q = q->next;
+        }
+        p = p->next;
+        if (p != NULL)
+            q = p->next;
+    }
+    return true;
+}
+```
+
+
+
+
+> 问题7：
+>
+> 删除表中所有介于给定的两个值之间的元素
+
+**基本设计思想：**
+
+​		逐个结点进行检查，执行删除
+
+```c
+bool Del_S_T(LinkList *L, ElemType S, ElemType T)
+{
+    LNode *p = (*L)->next, *pre = (*L);
+    while (p)
+    {
+        if (p->data >= S && p->data <= T)
+        {
+            pre->next = p->next;
+            free(p);
+            p = pre->next;
+        }
+        else
+        {
+            pre = p;
+            p = p->next;
+        }
+        
+    }
+}
+```
+
+
+
+> 问题8：
+>
+> 给定两个单链表，编写算法找出两个链表的公共结点
+
+**基本设计思想：**
+
+​		原理：两个链表公共的结点的所有后继结点都是一样的。
+
+```c
+LNode *Search_Common(LinkList L, LinkList M)
+{
+    LNode *p = L->next, *q = M->next;
+    int L_len, M_len;
+
+    for (L_len = 0; p != NULL; p = p->next, L_len++);
+    for (M_len = 0; q != NULL; q = q->next, M_len++);
+
+    p = L->next;
+    q = M->next;
+    if (M_len > L_len)
+        for (int i = 0; i < abs(L_len - M_len); i++) q = q->next;
+    else
+        for (int i = 0; i < abs(L_len - M_len); i++) p = p->next;
+
+    while (q)
+    {
+        if (q == p)
+            return p;
+        p = p->next;
+        q = q->next;
+    }
+    return NULL;
+}
+```
+

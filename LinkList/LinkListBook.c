@@ -129,3 +129,75 @@ void ReverseLinkList_2(LinkList *L)
     }
     (*L)->next = p;
 }
+
+bool SortList(LinkList *L)
+{
+    LNode *p = (*L)->next, *q = p->next;
+    ElemType temp;
+
+    if (*L == NULL)
+        return false;
+
+    while (p)
+    {
+        while (q)
+        {
+            if (p->data > q->data)
+            {
+                temp = p->data;
+                p->data = q->data;
+                q->data = temp;
+            }
+            q = q->next;
+        }
+        p = p->next;
+        if (p != NULL)
+            q = p->next;
+    }
+    return true;
+}
+
+bool Del_S_T(LinkList *L, ElemType S, ElemType T)
+{
+    LNode *p = (*L)->next, *pre = (*L);
+    while (p)
+    {
+        if (p->data >= S && p->data <= T)
+        {
+            pre->next = p->next;
+            free(p);
+            p = pre->next;
+        }
+        else
+        {
+            pre = p;
+            p = p->next;
+        }
+        
+    }
+}
+
+LNode *Search_Common(LinkList L, LinkList M)
+{
+    LNode *p = L->next, *q = M->next;
+    int L_len, M_len;
+
+    for (L_len = 0; p != NULL; p = p->next, L_len++);
+    for (M_len = 0; q != NULL; q = q->next, M_len++);
+
+    p = L->next;
+    q = M->next;
+    if (M_len > L_len)
+        for (int i = 0; i < abs(L_len - M_len); i++) q = q->next;
+    else
+        for (int i = 0; i < abs(L_len - M_len); i++) p = p->next;
+
+    while (q)
+    {
+        if (q == p)
+            return p;
+        p = p->next;
+        q = q->next;
+    }
+    return NULL;
+}
