@@ -112,6 +112,32 @@ void Q8Test()
     printf("\n");
 }
 
+void Q9Test()
+{
+    printf("\n***********Q9***********\n");
+    LinkList L;
+    HeadCreateLinkList(&L, 10);
+    PrintLinkList(L);
+    Del_List_By_Min(&L);
+}
+
+void Q10Test()
+{
+    printf("\n***********Q10***********\n");
+    LinkList L;
+    HeadCreateLinkList(&L, 10);
+    PrintLinkList(L);
+    
+    LinkList M, N;
+    M = (LinkList) malloc (sizeof(LNode));
+    N = (LinkList) malloc (sizeof(LNode));
+    M->next = NULL;
+    N->next = NULL;
+    Disolve_List(L, &M, &N);
+    PrintLinkList(M);
+    PrintLinkList(N);
+}
+
 int main(void)
 {   
     Q1Test();
@@ -129,6 +155,10 @@ int main(void)
     Q7Test();
 
     Q8Test();
+
+    Q9Test();
+
+    Q10Test();
 
     return 0;
 }

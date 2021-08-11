@@ -71,10 +71,10 @@ bool DestryLinkList(LinkList L)
 // 头插法建立链表
 bool HeadCreateLinkList(LinkList *L, int len)
 {
+    (*L) = (LNode *) malloc (sizeof(LNode));            // create the head node
     if ((*L) == NULL)
         return false;
 
-    (*L) = (LNode *) malloc (sizeof(LNode));            // create the head node
     (*L)->next = NULL;
 
     LNode *p;

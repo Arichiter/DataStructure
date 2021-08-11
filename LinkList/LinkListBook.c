@@ -201,3 +201,51 @@ LNode *Search_Common(LinkList L, LinkList M)
     }
     return NULL;
 }
+
+bool Del_List_By_Min(LinkList *L)
+{
+    // 书解
+    LNode *pre, *p;
+    while ((*L)->next != NULL)
+    {
+        pre = (*L);
+        p = pre->next;
+        while (p->next != NULL)
+        {
+            if (p->next->data < pre->next->data)
+                pre = p;
+            p = p->next;
+        }
+        printf("The min is %4d\n", pre->next->data);
+        LNode *u = pre->next;
+        pre->next = u->next;
+        free(u);
+    }
+    free(*L);
+}
+
+bool Disolve_List(LinkList L, LinkList *M, LinkList *N)
+{
+    LNode *r = (*M), *s = (*N);
+
+    LNode *q = L->next;
+    while (q)
+    {
+        LNode *p = (LNode *) malloc (sizeof(LNode));
+        if (q->data % 2 == 0)
+        {
+            p->data = q->data;
+            r->next = p;
+            r = p;
+        }
+        else
+        {
+            p->data = q->data;
+            s->next = p;
+            s = p;
+        }
+        q = q->next;
+    }
+    r->next = NULL;
+    s->next = NULL;
+}

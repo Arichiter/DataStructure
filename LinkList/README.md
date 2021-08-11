@@ -275,7 +275,7 @@ bool Del_S_T(LinkList *L, ElemType S, ElemType T)
 }
 ```
 
-
+# 8.11
 
 > 问题8：
 >
@@ -310,5 +310,52 @@ LNode *Search_Common(LinkList L, LinkList M)
     }
     return NULL;
 }
+```
+
+
+
+> 问题9：
+>
+> 存在一个无序链表，按递增序列删除列表
+
+**基本设计思想：**
+
+​		
+
+```c
+bool Del_List_By_Min(LinkList *L)
+{
+    // 书解
+    LNode *pre, *p;
+    while ((*L)->next != NULL)
+    {
+        pre = (*L);
+        p = pre->next;
+        while (p->next != NULL)
+        {
+            if (p->next->data < pre->next->data)
+                pre = p;
+            p = p->next;
+        }
+        printf("The min is %4d\n", pre->next->data);
+        LNode *u = pre->next;
+        pre->next = u->next;
+        free(u);
+    }
+    free(*L);
+}
+```
+
+
+
+> 问题10：
+>
+> 将一个带头结点的单链表A分解为两个带头结点的单链表A和B，使得A表中含有原表中序号为奇数的元素，而B表中含有原表中序号为偶数的元素，且保持其相对顺序不变。
+
+**基本设计思想：**
+
+​		
+
+```c
 ```
 
