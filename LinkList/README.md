@@ -357,5 +357,30 @@ bool Del_List_By_Min(LinkList *L)
 ​		
 
 ```c
+bool Disolve_List(LinkList L, LinkList *M, LinkList *N)
+{
+    LNode *r = (*M), *s = (*N);
+
+    LNode *q = L->next;
+    while (q)
+    {
+        LNode *p = (LNode *) malloc (sizeof(LNode));
+        if (q->data % 2 == 0)
+        {
+            p->data = q->data;
+            r->next = p;
+            r = p;
+        }
+        else
+        {
+            p->data = q->data;
+            s->next = p;
+            s = p;
+        }
+        q = q->next;
+    }
+    r->next = NULL;
+    s->next = NULL;
+}
 ```
 
