@@ -4,7 +4,7 @@ void Q1Test()
 {
     printf("\n***********Q1***********\n");
     LinkList L;
-    L = (LinkList) malloc (sizeof(LNode));
+    L = (LinkList)malloc(sizeof(LNode));
     L->data = 1;
     L->next = NULL;
 
@@ -12,7 +12,7 @@ void Q1Test()
     ElemType a[] = {1, 6, 2, 5, 1, 5, 9, 8, 5, 5};
     for (int i = 0; i < 10; i++)
     {
-        LNode *p = (LNode *) malloc (sizeof(LNode));
+        LNode *p = (LNode *)malloc(sizeof(LNode));
         p->data = a[i];
         q->next = p;
         q = p;
@@ -22,7 +22,6 @@ void Q1Test()
     PrintLinkList(L);
     DelNum(&L, 5);
     PrintLinkList(L);
-
 }
 
 void Q2Test()
@@ -34,7 +33,6 @@ void Q2Test()
     PrintLinkList(L);
     DelNum_2(&L, 3);
     PrintLinkList(L);
-
 }
 
 void Q3Test()
@@ -43,7 +41,7 @@ void Q3Test()
     LinkList L;
     HeadCreateLinkList(&L, 10);
     PrintLinkList(L);
-    ReversePrint(L->next);          // 不要把头结点传进去了，从第一个结点开始
+    ReversePrint(L->next); // 不要把头结点传进去了，从第一个结点开始
 }
 
 void Q4Test()
@@ -100,8 +98,10 @@ void Q8Test()
     HeadCreateLinkList(&M, 5);
 
     LNode *p = M->next, *q = L->next;
-    for (p = p->next; p->next != NULL; p = p->next);
-    for (int i = 0; i < 5; i++) q = q->next;
+    for (p = p->next; p->next != NULL; p = p->next)
+        ;
+    for (int i = 0; i < 5; i++)
+        q = q->next;
 
     PrintLinkList(L);
     PrintLinkList(M);
@@ -127,19 +127,19 @@ void Q10Test()
     LinkList L;
     HeadCreateLinkList(&L, 10);
     PrintLinkList(L);
-    
+
     LinkList M, N;
-    M = (LinkList) malloc (sizeof(LNode));
-    N = (LinkList) malloc (sizeof(LNode));
+    M = (LinkList)malloc(sizeof(LNode));
+    N = (LinkList)malloc(sizeof(LNode));
     M->next = NULL;
     N->next = NULL;
-    Disolve_List(L, &M, &N);
+    Disolve_List_1(L, &M, &N);
     PrintLinkList(M);
     PrintLinkList(N);
 }
 
 int main(void)
-{   
+{
     Q1Test();
 
     Q2Test();
