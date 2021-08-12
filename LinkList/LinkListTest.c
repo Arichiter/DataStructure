@@ -138,6 +138,18 @@ void Q10Test()
     PrintLinkList(N);
 }
 
+void Q11Test()
+{
+    printf("\n***********Q11***********\n");
+    LinkList A, B;
+    HeadCreateLinkList(&A, 10);
+    PrintLinkList(A);
+
+    Disolve_List_2(&A, &B);
+    PrintLinkList(A);
+    PrintLinkList(B);
+}
+
 int main(void)
 {
     Q1Test();
@@ -159,6 +171,8 @@ int main(void)
     Q9Test();
 
     Q10Test();
+
+    Q11Test();
 
     return 0;
 }

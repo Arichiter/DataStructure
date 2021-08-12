@@ -290,6 +290,24 @@ bool Disolve_List_1(LinkList L, LinkList *M, LinkList *N)
 }
 
 // 问题11：
-bool Disolve_List_2(LinkList *hc)
+bool Disolve_List_2(LinkList *A, LinkList *B)
 {
+    // 与上题一样，同样是按序号奇偶分开，B链表采用头插法，A链表采用尾插法
+    // 原地操作，先找到分界点
+    (*B) = (LinkList) malloc (sizeof(LNode));
+    (*B)->next = NULL;
+    LNode *p = (*A)->next, *q;
+    LNode *ra = *A;
+
+    while (p)
+    {
+        ra->next = p;   ra = p;
+        p = p->next;
+        if (p)
+            q = p->next;
+        p->next = (*B)->next;
+        (*B)->next = p;
+        p = q;
+    }
+    ra->next = NULL;
 }
