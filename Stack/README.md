@@ -33,3 +33,47 @@ bool Is_ERROR_Seqence(char *c)
 }
 ```
 
+
+
+>  问题4：
+>
+> 判断链表是否中心对称
+
+**基本设计思想：**
+
+​		
+
+```c
+bool Is_Symmetric(LinkList *L)
+{
+    LNode *p = (*L)->next;
+    int len = PrintLinkList(*L);
+    SqStack S;
+    InitStack(&S);
+
+    int i = 0;
+    while (i++ < len / 2)
+    {
+        Push(&S, p->data);
+        p = p->next;
+    }
+
+    if (len % 2 != 0)
+        p = p->next;
+
+    ElemType x;
+    while (p)
+    {
+        Pop(&S, &x);
+        if (x != p->data)
+            return false;
+        p = p->next;
+    }
+
+    if (!StackEmpty(S))
+        return false;
+
+    return true;
+}
+```
+
