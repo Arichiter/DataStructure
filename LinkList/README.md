@@ -384,3 +384,73 @@ bool Disolve_List(LinkList L, LinkList *M, LinkList *N)
 }
 ```
 
+# 8.12
+
+> 问题11：
+>
+> 设C = {a1, b1, a2, b2, ... , an, bn}为线性表，采用头结点的hc单链表存放，设计一个就地算法，将其拆分成为两个线性表，使得A = {a1, a2, ... , an}, B = {bn, ... , b2, b1}
+
+**基本设计思想：**
+
+​		
+
+```c
+bool Disolve_List_2(LinkList *A, LinkList *B)
+{
+    // 与上题一样，同样是按序号奇偶分开，B链表采用头插法，A链表采用尾插法
+    // 原地操作
+    (*B) = (LinkList)malloc(sizeof(LNode));
+    (*B)->next = NULL;
+    LNode *p = (*A)->next, *q; // p为工作指针
+    LNode *ra = *A;            // ra始终指向A的尾结点
+
+    while (p != NULL)
+    {
+        ra->next = p;
+        ra = p; // 将*p链到A的表尾
+        p = p->next;
+        if (p != NULL)
+            q = p->next; // 头插后，*p将断链，因此用q记忆*p的后继
+        // 头插法
+        p->next = (*B)->next; // 将*p插入到B的前端
+        (*B)->next = p;
+        p = q;
+    }
+    ra->next = NULL; // A尾结点的next域置空
+}
+```
+
+
+
+> 问题12：
+>
+> 删除链表中重复的元素
+
+**基本设计思想：**
+
+```c
+bool Delete_Common_Num(LinkList *L)
+{
+    LNode *p = (*L)->next, *q = p->next;
+    LNode *s;
+    // 一定要用指向后面的指针判空作为循环终止的条件
+    while (q)
+    {
+        if (p->data == q->data)
+        {
+            s = q;
+            q = q->next;
+            free(s);
+        }
+        else
+        {
+            p->next = q;
+            p = p->next;
+            q = q->next;
+        }
+    }
+}
+```
+
+
+

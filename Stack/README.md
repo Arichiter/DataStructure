@@ -8,8 +8,28 @@
 
 ---
 
-# 8.11
+# 8.12
+> 问题3：
+> 判断入栈、出栈序列是否合理
 
-> 问题1：
->
-> 
+**基本设计思想：**
+
+​		
+
+```c
+bool Is_ERROR_Seqence(char *c)
+{
+    int i = 0, j = 0;
+    while (c[i] != '\0')
+    {
+        if (c[i] == 'I') j++;
+        else j--;
+
+        if (j < 0) return false;
+
+        i++;
+    }
+    return true;
+}
+```
+

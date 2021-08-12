@@ -256,7 +256,6 @@ bool Disolve_List_By_JiOu(LinkList L, LinkList *M, LinkList *N)
     }
     r->next = NULL;
     s->next = NULL;
-
 }
 
 // 问题10：按序号奇偶分解链表
@@ -293,21 +292,45 @@ bool Disolve_List_1(LinkList L, LinkList *M, LinkList *N)
 bool Disolve_List_2(LinkList *A, LinkList *B)
 {
     // 与上题一样，同样是按序号奇偶分开，B链表采用头插法，A链表采用尾插法
-    // 原地操作，先找到分界点
-    (*B) = (LinkList) malloc (sizeof(LNode));
+    // 原地操作
+    (*B) = (LinkList)malloc(sizeof(LNode));
     (*B)->next = NULL;
-    LNode *p = (*A)->next, *q;
-    LNode *ra = *A;
+    LNode *p = (*A)->next, *q; // p为工作指针
+    LNode *ra = *A;            // ra始终指向A的尾结点
 
-    while (p)
+    while (p != NULL)
     {
-        ra->next = p;   ra = p;
+        ra->next = p;
+        ra = p; // 将*p链到A的表尾
         p = p->next;
-        if (p)
-            q = p->next;
-        p->next = (*B)->next;
+        if (p != NULL)
+            q = p->next; // 头插后，*p将断链，因此用q记忆*p的后继
+        // 头插法
+        p->next = (*B)->next; // 将*p插入到B的前端
         (*B)->next = p;
         p = q;
     }
-    ra->next = NULL;
+    ra->next = NULL; // A尾结点的next域置空
+}
+
+// 问题12：
+bool Delete_Common_Num(LinkList *L)
+{
+    LNode *p = (*L)->next, *q = p->next;
+    LNode *s;
+    while (q)
+    {
+        if (p->data == q->data)
+        {
+            s = q;
+            q = q->next;
+            free(s);
+        }
+        else
+        {
+            p->next = q;
+            p = p->next;
+            q = q->next;
+        }
+    }
 }

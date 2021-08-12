@@ -150,6 +150,35 @@ void Q11Test()
     PrintLinkList(B);
 }
 
+void Q12Test()
+{
+    printf("\n***********Q12***********\n");
+    LinkList L = (LinkList) malloc (sizeof(LNode));
+    L->next = NULL;
+    ElemType a[] = {7, 10, 10, 21, 30, 42, 42, 42, 51, 70};
+    int len = sizeof(a) / sizeof(ElemType);
+
+    LNode *q = L;
+    for (int i = 0; i < len; i++)
+    {
+        LNode *p = (LNode *) malloc (sizeof(LNode));
+        p->data = a[i];
+        // 尾插法
+        p->next = q->next;
+        q->next = p;
+        q = p;
+        // 头插法
+        // p->next = L->next;
+        // L->next = p;
+    }
+    q->next = NULL;
+    PrintLinkList(L);
+
+    Delete_Common_Num(&L);
+    PrintLinkList(L);
+
+}
+
 int main(void)
 {
     Q1Test();
@@ -173,6 +202,8 @@ int main(void)
     Q10Test();
 
     Q11Test();
+
+    Q12Test();
 
     return 0;
 }
