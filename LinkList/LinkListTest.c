@@ -179,6 +179,22 @@ void Q12Test()
 
 }
 
+void Q13Test()
+{
+    printf("\n***********Q13***********\n");
+    LinkList L, S;
+    HeadCreateLinkList(&L, 10);
+    HeadCreateLinkList(&S, 10);
+    SortList(&L);
+    SortList(&S);
+    PrintLinkList(L);
+    PrintLinkList(S);
+
+    MergeSqquentialList(&L, &S);
+    PrintLinkList(L);
+
+}
+
 int main(void)
 {
     Q1Test();
@@ -204,6 +220,8 @@ int main(void)
     Q11Test();
 
     Q12Test();
+
+    Q13Test();
 
     return 0;
 }

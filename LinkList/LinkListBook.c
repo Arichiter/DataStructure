@@ -334,3 +334,87 @@ bool Delete_Common_Num(LinkList *L)
         }
     }
 }
+
+// 问题13：合并两个递减有序链表尾一个递减有序链表
+// LinkList MergeSqquentialList(LinkList *L, LinkList *S)
+// {
+//     LNode *p = (*L)->next, *q = (*S)->next, *temp;
+
+//     if (p == NULL && q == NULL)
+//         return false;
+
+//     while (p && q)
+//     {
+//         if (p->data > q->data)
+//         {
+//             while (p)
+//                 if (p->data > q->data)
+//                     p = p->next;
+//                 else
+//                     break;
+
+//             temp = p->next;
+//             p->next = q;
+//             p = temp;
+//             q = q->next;
+//         }
+//         else
+//         {
+//             while (q)
+//                 if (q->data > p->data)
+//                     q = q->next;
+//                 else
+//                     break;
+//             temp = q->next;
+//             q->next = p;
+//             q = temp;
+//             p = p->next;
+//         }
+//     }
+
+//     if (p)
+//         q->next = p;
+//     else
+//         p->next = q;
+
+//     if ((*L)->next->data > (*S)->next->data)
+//         return (*L);
+//     else
+//         return (*S);
+// }
+
+// 问题13：书解
+void MergeSqquentialList(LinkList *La, LinkList *Lb)
+{
+    LNode *r, *pa = (*La)->next, *pb = (*Lb)->next;
+    (*La)->next = NULL;
+    while (pa && pb)
+    {
+        // 头插法逐个插入新链表
+        if (pa->data <= pb->data)
+        {
+            r = pa->next;
+            pa->next = (*La)->next;
+            (*La)->next = pa;
+            pa = r;
+        }
+        else
+        {
+            r = pb->next;
+            pb->next = (*La)->next;
+            (*La)->next = pb;
+            pb = r;
+        }
+    }
+    if (pa)
+        pb = pa;
+    
+    while (pb)
+    {
+        r = pb->next;
+        pb->next = (*La)->next;
+        (*La)->next = pb;
+        pb = r;
+    }
+    free((*Lb));
+}

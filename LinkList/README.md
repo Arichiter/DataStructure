@@ -454,3 +454,52 @@ bool Delete_Common_Num(LinkList *L)
 
 
 
+# 8.15
+
+> 问题13：
+>
+> 原地将两个递增有序链表合并成一个递减有序链表
+
+**基本设计思想：**
+
+​		用指针q指向第一个链表，指针p指向第二个链表。判断谁的第一个元素大，然后遍历此链表找到比另一个链表更大的那个元素，连接到该链表，依此类推，直到一个链表遍历完成，则将另一个来链表接在后面。
+
+​		
+
+```c
+// 问题13：书解
+void MergeSqquentialList(LinkList *La, LinkList *Lb)
+{
+    LNode *r, *pa = (*La)->next, *pb = (*Lb)->next;
+    (*La)->next = NULL;
+    while (pa && pb)
+    {
+        // 头插法逐个插入新链表
+        if (pa->data <= pb->data)
+        {
+            r = pa->next;
+            pa->next = (*La)->next;
+            (*La)->next = pa;
+            pa = r;
+        }
+        else
+        {
+            r = pb->next;
+            pb->next = (*La)->next;
+            (*La)->next = pb;
+            pb = r;
+        }
+    }
+    if (pa)
+        pb = pa;
+    
+    while (pb)
+    {
+        r = pb->next;
+        pb->next = (*La)->next;
+        (*La)->next = pb;
+        pb = r;
+    }
+    free((*Lb));
+}
+```
