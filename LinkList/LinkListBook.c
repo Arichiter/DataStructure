@@ -418,3 +418,28 @@ void MergeSqquentialList(LinkList *La, LinkList *Lb)
     }
     free((*Lb));
 }
+
+// 问题14：将两个递增有序链表中的公共元素构造成一个单链表C
+void Get_Common(LinkList A, LinkList B)
+{
+    LNode *p = A->next, *q = B->next, *r, *s;
+    LinkList C = (LinkList) malloc (sizeof(LNode));
+    r = C;
+    while (p != NULL && q != NULL)
+    {
+        if (p->data < q->data)
+            p = p->next;
+        else if (p->data > q->next)
+            q = q->next;
+        else
+        {
+            s = (LNode *) malloc (sizeof(LNode));
+            s->data = p->data;
+            r->next = s;
+            r = s;
+            p = p->next;
+            q = q->next;
+        }
+    }
+    r->next = NULL;
+}

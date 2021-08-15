@@ -503,3 +503,39 @@ void MergeSqquentialList(LinkList *La, LinkList *Lb)
     free((*Lb));
 }
 ```
+
+> 问题14：
+>
+> 将两个递增有序链表的公共元素构成一个链表
+
+**基本设计思想：**
+
+​		表A、B都有序，可从第一个元素一次比较A、B两表的元素，若元素值不等，则值小的指针往后移，若元素值相等，则创建一个值等于两结点的元素值的新节点，使用尾插法插入到新的链表中，并将两个原表指针后移一位，直到其中一个链表遍历到表尾
+
+​		
+
+```c
+void Get_Common(LinkList A, LinkList B)
+{
+    LNode *p = A->next, *q = B->next, *r, *s;
+    LinkList C = (LinkList) malloc (sizeof(LNode));
+    r = C;
+    while (p != NULL && q != NULL)
+    {
+        if (p->data < q->data)
+            p = p->next;
+        else if (p->data > q->next)
+            q = q->next;
+        else
+        {
+            s = (LNode *) malloc (sizeof(LNode));
+            s->data = p->data;
+            r->next = s;
+            r = s;
+            p = p->next;
+            q = q->next;
+        }
+    }
+    r->next = NULL;
+}
+```
