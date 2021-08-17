@@ -408,7 +408,7 @@ void MergeSqquentialList(LinkList *La, LinkList *Lb)
     }
     if (pa)
         pb = pa;
-    
+
     while (pb)
     {
         r = pb->next;
@@ -423,17 +423,17 @@ void MergeSqquentialList(LinkList *La, LinkList *Lb)
 void Get_Common(LinkList A, LinkList B)
 {
     LNode *p = A->next, *q = B->next, *r, *s;
-    LinkList C = (LinkList) malloc (sizeof(LNode));
+    LinkList C = (LinkList)malloc(sizeof(LNode));
     r = C;
     while (p != NULL && q != NULL)
     {
         if (p->data < q->data)
             p = p->next;
-        else if (p->data > q->next)
+        else if (p->data > q->data)
             q = q->next;
         else
         {
-            s = (LNode *) malloc (sizeof(LNode));
+            s = (LNode *)malloc(sizeof(LNode));
             s->data = p->data;
             r->next = s;
             r = s;
@@ -442,4 +442,55 @@ void Get_Common(LinkList A, LinkList B)
         }
     }
     r->next = NULL;
+}
+
+// 问题15：求两个有序链表的交集★★★★★
+LinkList Union(LinkList *la, LinkList *lb)
+{
+    // 如上题，依次遍历链表，比较节点的大小值，若相等则链入新链表，否则，按规则后移。
+    LNode *pa = (*la)->next, *pb = (*lb)->next;
+    LinkList pc = (*la);
+
+    LNode *temp;
+    while (pa && pb) // 一个链表遍历完成便结束
+    {
+        if (pa->data > pb->data)
+        {
+            temp = pa;
+            pa = pa->next;
+            free(temp);
+        }
+        else if (pa->data < pb->data)
+        {
+            temp = pb;
+            pb = pb->next;
+            free(temp);
+        }
+        else
+        {
+            pc->next = pa;
+            pc = pa;
+            pa = pa->next;
+            temp = pb;
+            pb = pb->next;
+            free(temp);
+        }
+    }
+
+    while (pa)
+    {
+        temp = pa;
+        pa = pa->next;
+        free(temp);
+    }
+
+    while (pb)
+    {
+        temp = pb;
+        pb = pb->next;
+        free(temp);
+    }
+    pc->next = NULL;
+    free(lb);
+    return (*la);
 }
