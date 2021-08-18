@@ -153,7 +153,7 @@ void Q11Test()
 void Q12Test()
 {
     printf("\n***********Q12***********\n");
-    LinkList L = (LinkList) malloc (sizeof(LNode));
+    LinkList L = (LinkList)malloc(sizeof(LNode));
     L->next = NULL;
     ElemType a[] = {7, 10, 10, 21, 30, 42, 42, 42, 51, 70};
     int len = sizeof(a) / sizeof(ElemType);
@@ -161,7 +161,7 @@ void Q12Test()
     LNode *q = L;
     for (int i = 0; i < len; i++)
     {
-        LNode *p = (LNode *) malloc (sizeof(LNode));
+        LNode *p = (LNode *)malloc(sizeof(LNode));
         p->data = a[i];
         // 尾插法
         p->next = q->next;
@@ -176,7 +176,6 @@ void Q12Test()
 
     Delete_Common_Num(&L);
     PrintLinkList(L);
-
 }
 
 void Q13Test()
@@ -192,12 +191,11 @@ void Q13Test()
 
     MergeSqquentialList(&L, &S);
     PrintLinkList(L);
-
 }
 
 void Q15Test()
 {
-    printf("\n***********Q13***********\n");
+    printf("\n***********Q15***********\n");
     LinkList L, S;
     HeadCreateLinkList(&L, 10);
     HeadCreateLinkList(&S, 10);
@@ -206,8 +204,45 @@ void Q15Test()
     PrintLinkList(L);
     PrintLinkList(S);
 
-    LinkList LC = Union(&L, &S);
-    PrintLinkList(LC);
+    LinkList *LC = Union(&L, &S);
+    PrintLinkList(*LC);
+}
+
+void Q16Test()
+{
+    printf("\n***********Q16***********\n");
+    LinkList A, B;
+    InitLinkList(&A);
+    InitLinkList(&B);
+
+    LNode *pa = A, *pb = B;
+    ElemType a[] = {1, 3, 5, 1, 3, 6, 8, 19, 7, 5};
+    ElemType b[] = {3, 6, 19};
+    for (int i = 0; i < sizeof(a) / sizeof(ElemType); i++)
+    {
+        LNode *p = (LNode *)malloc(sizeof(LNode));
+        p->data = a[i];
+        pa->next = p;
+        pa = p;
+    }
+    pa->next = NULL;
+
+    for (int i = 0; i < sizeof(b) / sizeof(ElemType); i++)
+    {
+        LNode *p = (LNode *)malloc(sizeof(LNode));
+        p->data = b[i];
+        pb->next = p;
+        pb = p;
+    }
+    pb->next = NULL;
+
+    PrintLinkList(A);
+    PrintLinkList(B);
+
+    bool i = Pattern(A, B);
+    printf("%d\n", i);
+
+    
 }
 
 int main(void)
@@ -239,6 +274,8 @@ int main(void)
     Q13Test();
 
     Q15Test();
+
+    Q16Test();
 
     return 0;
 }

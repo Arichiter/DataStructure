@@ -445,7 +445,7 @@ void Get_Common(LinkList A, LinkList B)
 }
 
 // 问题15：求两个有序链表的交集★★★★★
-LinkList Union(LinkList *la, LinkList *lb)
+LinkList *Union(LinkList *la, LinkList *lb)
 {
     // 如上题，依次遍历链表，比较节点的大小值，若相等则链入新链表，否则，按规则后移。
     LNode *pa = (*la)->next, *pb = (*lb)->next;
@@ -491,6 +491,30 @@ LinkList Union(LinkList *la, LinkList *lb)
         free(temp);
     }
     pc->next = NULL;
-    free(lb);
-    return (*la);
+    free(*lb);
+    return la;
+}
+
+// 问题16：判断链表B是A的连续子序列
+bool Pattern(LinkList A, LinkList B)
+{
+    LNode *p = A->next, *head = B->next, *q = head;
+    while (p && q)
+    {
+        if (q->data == p->data)
+        {
+            p = p->next;
+            q = q->next;
+        }
+        else
+        {
+            q = head;
+            p = p->next;
+        }
+    }
+
+    if (q == NULL)
+        return true;
+    else
+        return false;
 }

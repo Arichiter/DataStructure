@@ -552,4 +552,92 @@ void Get_Common(LinkList A, LinkList B)
 
 ​		【书解】采用归并的思想，设置两个工作指针pa，pb，对两个链表进行归并扫描，只有同时出现在两个集合中的元素才链到结果表中且仅保留一个，其它的结点全部释放。当一个链表遍历完毕后，释放另一个表中剩下的全部节点。
 
+```c
+LinkList *Union(LinkList *la, LinkList *lb)
+{
+    // 如上题，依次遍历链表，比较节点的大小值，若相等则链入新链表，否则，按规则后移。
+    LNode *pa = (*la)->next, *pb = (*lb)->next;
+    LinkList pc = (*la);
+
+    LNode *temp;
+    while (pa && pb) // 一个链表遍历完成便结束
+    {
+        if (pa->data > pb->data)
+        {
+            temp = pa;
+            pa = pa->next;
+            free(temp);
+        }
+        else if (pa->data < pb->data)
+        {
+            temp = pb;
+            pb = pb->next;
+            free(temp);
+        }
+        else
+        {
+            pc->next = pa;
+            pc = pa;
+            pa = pa->next;
+            temp = pb;
+            pb = pb->next;
+            free(temp);
+        }
+    }
+
+    while (pa)
+    {
+        temp = pa;
+        pa = pa->next;
+        free(temp);
+    }
+
+    while (pb)
+    {
+        temp = pb;
+        pb = pb->next;
+        free(temp);
+    }
+    pc->next = NULL;
+    free(lb);
+    return la;
+}
+```
+
+
+
+# 8.18
+
+> 问题16：
+>
+> 两个整数序列存入链表A、B，判断B是A的连续子序列
+
+**基本设计思想：**
+
 ​		
+
+```c
+bool Pattern(LinkList A, LinkList B)
+{
+    LNode *p = A->next, *head = B->next, *q = head;
+    while (p && q)
+    {
+        if (q->data == p->data)
+        {
+            p = p->next;
+            q = q->next;
+        }
+        else
+        {
+            q = head;
+            p = p->next;
+        }
+    }
+
+    if (q == NULL)
+        return true;
+    else
+        return false;
+}
+```
+
